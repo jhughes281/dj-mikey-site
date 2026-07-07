@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DJ Mikey | Official</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --black: #080808;
+    --coal: #111111;
+    --ash: #1a1a1a;
+    --wire: #252525;
+    --red: #C8102E;
+    --red-dim: #8a0b1f;
+    --white: #F0EDE8;
+    --muted: #888;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Space Grotesk', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--body);
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 3rem;
+    border-bottom: 1px solid var(--wire);
+    background: rgba(8,8,8,0.92);
+    backdrop-filter: blur(8px);
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-book {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 0.55rem 1.4rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-decoration: none;
+  }
+  .nav-book:hover { background: var(--red-dim); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    border-bottom: 1px solid var(--wire);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #0a0000 0%, #080808 50%, #000a0a 100%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--wire) 1px, transparent 1px),
+      linear-gradient(90deg, var(--wire) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.25;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(6rem, 18vw, 18rem);
+    line-height: 0.85;
+    letter-spacing: -0.01em;
+    position: relative;
+  }
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+  .glitch::before, .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .glitch::before {
+    color: var(--red);
+    animation: glitch1 3s infinite;
+    clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+  }
+  .glitch::after {
+    color: #00f0ff;
+    animation: glitch2 3s infinite;
+    clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+  }
+  @keyframes glitch1 {
+    0%,90%,100% { transform: none; opacity: 0; }
+    92% { transform: translateX(-4px); opacity: 0.7; }
+    94% { transform: translateX(4px); opacity: 0.7; }
+    96% { transform: translateX(-2px); opacity: 0.7; }
+    98% { transform: none; opacity: 0; }
+  }
+  @keyframes glitch2 {
+    0%,88%,100% { transform: none; opacity: 0; }
+    90% { transform: translateX(4px); opacity: 0.6; }
+    92% { transform: translateX(-4px); opacity: 0.6; }
+    94% { transform: translateX(2px); opacity: 0; }
+  }
+  .hero-sub {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .hero-tagline {
+    max-width: 420px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+  .hero-tagline strong { color: var(--white); }
+  .hero-stats { display: flex; gap: 3rem; }
+  .stat-num {
+    font-family: var(--display);
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--red);
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 3rem;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.25em;
+    color: var(--wire);
+    writing-mode: vertical-rl;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* TICKER */
+  .ticker-wrap {
+    border-top: 1px solid var(--wire);
+    border-bottom: 1px solid var(--wire);
+    background: var(--coal);
+    overflow: hidden;
+    padding: 0.85rem 0;
+  }
+  .ticker-inner {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: ticker 20s linear infinite;
+  }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+  .ticker-item {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    padding: 0 1rem;
+  }
+  .ticker-sep { color: var(--red); margin: 0 0.5rem; }
+
+  /* BIO */
+  #bio {
+    padding: 6rem 3rem;
+    border-bottom: 1px solid var(--wire);
+  }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+  }
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .bio-img-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--ash);
+    border: 1px solid var(--wire);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--wire);
+    gap: 1rem;
+    position: relative;
+  }
+  .bio-img-placeholder svg { width: 60px; height: 60px; }
+  .bio-img-label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: var(--wire);
+  }
+  .bio-text p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #aaa;
+    margin-bottom: 1.5rem;
+  }
+  .bio-text p strong { color: var(--white); }
+
+  /* MUSIC */
+  #music {
+    padding: 6rem 3rem;
+    border-bottom: 1px solid var(--wire);
+    background: var(--coal);
+  }
+  .tracks-list { margin-top: 3rem; }
+  .track {
+    display: grid;
+    grid-template-columns: 2rem 2rem 1fr auto auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--wire);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .track:hover { background: var(--ash); padding-left: 1rem; margin-left: -1rem; padding-right: 1rem; }
+  .track-num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+  .track-play {
+    font-size: 0.7rem;
+    color: var(--red);
+  }
+  .track-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+  .track-artist {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+  .track-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid var(--red-dim);
+    padding: 0.2rem 0.5rem;
+  }
+  .track-duration {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  /* EVENTS */
+  #events {
+    padding: 6rem 3rem;
+    border-bottom: 1px solid var(--wire);
+  }
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .event-card {
+    background: var(--coal);
+    border: 1px solid var(--wire);
+    padding: 2rem;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .event-card:hover { border-color: var(--red); }
+  .event-date {
+    font-family: var(--display);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--red);
+  }
+  .event-month {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+  .event-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+  .event-venue {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .event-btn {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid var(--wire);
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    background: transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .event-btn:hover { background: var(--red); border-color: var(--red); }
+
+  /* GALLERY */
+  #gallery {
+    padding: 6rem 3rem;
+    border-bottom: 1px solid var(--wire);
+    background: var(--coal);
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--ash);
+    border: 1px solid var(--wire);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--wire);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-item:hover { border-color: var(--red); }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(200,16,46,0.15);
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-overlay svg { width: 32px; color: var(--white); }
+
+  /* BOOKING */
+  #booking {
+    padding: 6rem 3rem;
+  }
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .booking-info p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .booking-info p strong { color: var(--white); }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--wire);
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .contact-item span:first-child { color: var(--red); min-width: 60px; }
+  .booking-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--coal);
+    border: 1px solid var(--wire);
+    color: var(--white);
+    font-family: var(--body);
+    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--red); }
+  .form-group select option { background: var(--coal); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .submit-btn {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  .submit-btn:hover { background: var(--red-dim); }
+
+  /* FOOTER */
+  footer {
+    background: var(--coal);
+    border-top: 1px solid var(--wire);
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: var(--display);
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .footer-socials { display: flex; gap: 1.5rem; }
+  .footer-socials a {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .footer-socials a:hover { color: var(--red); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { padding: 0 1.5rem 4rem; }
+    #bio, #music, #events, #gallery, #booking { padding: 4rem 1.5rem; }
+    .bio-grid, .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">DJ <span>MIKEY</span></a>
+  <ul class="nav-links">
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#booking">Contact</a></li>
+  </ul>
+  <a href="#booking" class="nav-book">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">// Houston, TX — Since The Block Was Hot</div>
+  <h1 class="hero-title">
+    <span class="glitch" data-text="DJ">DJ</span><br>
+    <span class="glitch" data-text="MIKEY">MIKEY</span>
+  </h1>
+  <div class="hero-sub">
+    <p class="hero-tagline"><strong>Michael Turner.</strong> The decks don't lie — raw energy, locked-in rhythm, and sets that don't stop.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Years Rocking</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Sets Played</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">HTX</div>
+        <div class="stat-label">Based</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item">HIP-HOP<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">TRAP<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">DJ MIKEY<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">LIVE SETS<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">HOUSTON TX<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">PRIVATE EVENTS<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">CLUB NIGHTS<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">HIP-HOP<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">TRAP<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">DJ MIKEY<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">LIVE SETS<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">HOUSTON TX<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">PRIVATE EVENTS<span class="ticker-sep">///</span></span>
+    <span class="ticker-item">CLUB NIGHTS<span class="ticker-sep">///</span></span>
+  </div>
+</div>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="section-tag">// 01 — About</div>
+  <div class="bio-grid">
+    <div class="bio-img-placeholder" data-label="PHOTO">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      <span class="bio-img-label">// upload your photo</span>
+    </div>
+    <div class="bio-text">
+      <div class="section-title">THE MAN<br>BEHIND<br>THE DECKS</div>
+      <p>
+        <strong>DJ Mikey (Michael Turner)</strong> has been a fixture in Houston's nightlife scene for over a decade — from backyard cookouts to packed clubs, he brings the same relentless energy every single time.
+      </p>
+      <p>
+        Rooted in <strong>hip-hop and trap</strong>, Mikey's sets aren't playlists — they're journeys. He reads the crowd, builds the room, and keeps the floor locked in from the first drop to the last track.
+      </p>
+      <p>
+        Available for <strong>club nights, private events, corporate functions, and weddings</strong>. If you want a DJ who shows up and shows out, you know who to call.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- MUSIC -->
+<section id="music">
+  <div class="section-tag">// 02 — Music</div>
+  <div class="section-title">RECENT MIXES</div>
+  <div class="tracks-list">
+    <div class="track">
+      <span class="track-num">01</span>
+      <span class="track-play">▶</span>
+      <div class="track-info">
+        <div class="track-name">Friday Night Takeover</div>
+        <div class="track-artist">DJ Mikey · Hip-Hop / Trap</div>
+      </div>
+      <span class="track-tag">New</span>
+      <span class="track-duration">1:12:34</span>
+    </div>
+    <div class="track">
+      <span class="track-num">02</span>
+      <span class="track-play">▶</span>
+      <div class="track-info">
+        <div class="track-name">Summer Block Party Mix</div>
+        <div class="track-artist">DJ Mikey · Hip-Hop / Cookout</div>
+      </div>
+      <span class="track-tag">Hot</span>
+      <span class="track-duration">58:10</span>
+    </div>
+    <div class="track">
+      <span class="track-num">03</span>
+      <span class="track-play">▶</span>
+      <div class="track-info">
+        <div class="track-name">Trap Season — Club Edit</div>
+        <div class="track-artist">DJ Mikey · Trap</div>
+      </div>
+      <span class="track-tag"></span>
+      <span class="track-duration">47:22</span>
+    </div>
+    <div class="track">
+      <span class="track-num">04</span>
+      <span class="track-play">▶</span>
+      <div class="track-info">
+        <div class="track-name">Old School vs. New School</div>
+        <div class="track-artist">DJ Mikey · Hip-Hop Throwback</div>
+      </div>
+      <span class="track-tag"></span>
+      <span class="track-duration">1:04:55</span>
+    </div>
+    <div class="track">
+      <span class="track-num">05</span>
+      <span class="track-play">▶</span>
+      <div class="track-info">
+        <div class="track-name">Graduation Night Live Set</div>
+        <div class="track-artist">DJ Mikey · Live Recording</div>
+      </div>
+      <span class="track-tag"></span>
+      <span class="track-duration">2:18:00</span>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="section-tag">// 03 — Events</div>
+  <div class="section-title">UPCOMING<br>SHOWS</div>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-date">18</div>
+      <div class="event-month">July 2026</div>
+      <div class="event-name">Friday Night Live — Club Tropics</div>
+      <div class="event-venue">Club Tropics · Houston, TX</div>
+      <a href="#booking" class="event-btn">Get Tickets</a>
+    </div>
+    <div class="event-card">
+      <div class="event-date">26</div>
+      <div class="event-month">July 2026</div>
+      <div class="event-name">Rooftop Sessions</div>
+      <div class="event-venue">The Vue Rooftop · Houston, TX</div>
+      <a href="#booking" class="event-btn">Get Tickets</a>
+    </div>
+    <div class="event-card">
+      <div class="event-date">09</div>
+      <div class="event-month">August 2026</div>
+      <div class="event-name">Summer Cookout Series</div>
+      <div class="event-venue">Hermann Park · Houston, TX</div>
+      <a href="#booking" class="event-btn">Get Tickets</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-tag">// 04 — Gallery</div>
+  <div class="section-title">IN THE<br>MOMENT</div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      // photo 01
+      <div class="gallery-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="gallery-item">
+      // photo 02
+      <div class="gallery-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="gallery-item">
+      // photo 03
+      <div class="gallery-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="gallery-item">
+      // photo 04
+      <div class="gallery-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="gallery-item">
+      // photo 05
+      <div class="gallery-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+    <div class="gallery-item">
+      // photo 06
+      <div class="gallery-overlay">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="section-tag">// 05 — Book</div>
+  <div class="section-title">LET'S<br>MAKE IT<br>HAPPEN</div>
+  <div class="booking-grid">
+    <div class="booking-info">
+      <p>
+        Ready to bring <strong>DJ Mikey</strong> to your event? Fill out the form and we'll get back to you within 24 hours. All events considered — clubs, private parties, corporate, weddings, and more.
+      </p>
+      <div class="contact-item">
+        <span>EMAIL</span>
+        <span>booking@djmikey.com</span>
+      </div>
+      <div class="contact-item">
+        <span>PHONE</span>
+        <span>(713) 000-0000</span>
+      </div>
+      <div class="contact-item">
+        <span>BASED</span>
+        <span>Houston, TX</span>
+      </div>
+      <div class="contact-item">
+        <span>IG</span>
+        <span>@djmikey</span>
+      </div>
+    </div>
+    <div class="booking-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Michael"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Turner"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" placeholder="(713) 000-0000"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Event Type</label>
+          <select>
+            <option>Club Night</option>
+            <option>Private Party</option>
+            <option>Corporate Event</option>
+            <option>Wedding</option>
+            <option>Cookout / Outdoor</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Event Date</label>
+          <input type="date"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tell Me About the Event</label>
+        <textarea placeholder="Venue, vibe, expected crowd size, any special requests..."></textarea>
+      </div>
+      <button class="submit-btn">Send Booking Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">DJ <span>MIKEY</span></div>
+  <div class="footer-copy">© 2026 DJ Mikey (Michael Turner) · Houston, TX · All rights reserved</div>
+  <div class="footer-socials">
+    <a href="#">Instagram</a>
+    <a href="#">SoundCloud</a>
+    <a href="#">YouTube</a>
+  </div>
+</footer>
+
+</body>
+</html>
